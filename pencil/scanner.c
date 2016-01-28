@@ -27,6 +27,12 @@ init_transtab ( void )
 command_t
 next ( FILE *input )
 {
-	printf( "%c\n", getc(input) );
-    return END;
+	char c;
+	do{
+		c = getc( input );
+		printf( "%c\n", c);
+	}while( c != EOF );
+
+//	printf( "%c\n", getc(input) );
+   	return END;
 }
