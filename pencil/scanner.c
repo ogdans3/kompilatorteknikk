@@ -6,7 +6,7 @@
 #include "pencil.h"
 
 
-int transitionTable [4][128];
+int transitionTable [4][360];
 char token[4];
 int __index = 0;
 
@@ -62,10 +62,16 @@ next ( FILE *input )
 		c = tolower(fgetc( input ));
 		newState = transitionTable[__index][(int)c];
 
+		// Here we read the input again, iff it went from an accepting
+		// step to state 0, means that mmove will be recognized
+		if( newState == 0  ){
+			newState = transitionTable[ newState ][(int)c];
+		}
 		//Since all the tokens are of the same length, we do not actually have to clean the token array
 		//when a word fails, since it will automatically rewrite the values correctly.
 		token[__index] = c;
 		__index = newState;
+
 		/*
 		printf( "%s\n", token );
 		printf( "%d\n", __index );
