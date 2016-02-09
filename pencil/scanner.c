@@ -85,7 +85,6 @@ next ( FILE *input )
                 		return DRAW;
         		} 
         		else if( token[0] == 't' ){
-				printf( "%s\n", "Turn Recognized");
                 		return TURN;
         		}else{
 				return END;
