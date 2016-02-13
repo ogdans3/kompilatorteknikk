@@ -1,0 +1,18 @@
+statement_list          : statement { printf( "statement" ); }
+;
+if_statement: IF expression THEN statement_list { printf( "If statement"); }
+;
+
+
+function : FUNC OPENBLOCK statement_list CLOSEBLOCK{ printf("Function yay\n"); }
+;
+
+
+
+FUNC BEGIN a IF a=a THEN 2 END
+
+FUNC BEGIN asd IF asd THEN asd END
+
+FUNC asd( asd ) IF a=a THEN 2
+
+

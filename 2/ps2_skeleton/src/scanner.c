@@ -398,8 +398,8 @@ struct yy_trans_info
 static yyconst flex_int16_t yy_accept[72] =
     {   0,
         0,    0,   24,   22,   14,   15,   17,   16,   18,   22,
-       22,   20,   22,   22,   22,   22,   22,   22,   22,   22,
-       22,   22,   22,   22,    0,   19,    0,   20,   21,   21,
+       22,   20,   21,   21,   21,   21,   21,   21,   21,   21,
+       21,   21,   21,   21,    0,   19,    0,   20,   21,   21,
        21,   11,   21,   21,   21,    7,   21,   21,   21,   21,
        21,    0,   13,   21,   21,   21,    3,   21,   21,   21,
        21,   12,   21,   21,   21,    9,    1,   21,   21,    8,
@@ -817,114 +817,114 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 YY_RULE_SETUP
 #line 9 "src/scanner.l"
-{ printf("Recognized %s\n", "FUNC");return FUNC; }
+{ return FUNC; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
 #line 10 "src/scanner.l"
-{ printf("Recognized %s\n", "BEGIN");return OPENBLOCK; }
+{ return OPENBLOCK; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
 #line 11 "src/scanner.l"
-{ printf("Recognized %s\n", "END");return CLOSEBLOCK; }
+{ return CLOSEBLOCK; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 12 "src/scanner.l"
-{ printf("Recognized %s\n", "RETURN");return RETURN; }
+{ return RETURN; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
 #line 13 "src/scanner.l"
-{ printf("Recognized %s\n", "PRINT");return PRINT; }
+{ return PRINT; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
 #line 14 "src/scanner.l"
-{ printf("Recognized %s\n", "CONTINUE");return CONTINUE; }
+{ return CONTINUE; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
 #line 15 "src/scanner.l"
-{ printf("Recognized %s\n", "IF");return IF; }
+{ return IF; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
 #line 16 "src/scanner.l"
-{ printf("Recognized %s\n", "THEN");return THEN; }
+{ return THEN; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
 #line 17 "src/scanner.l"
-{ printf("Recognized %s\n", "ELSE");return ELSE; }
+{ return ELSE; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
 #line 18 "src/scanner.l"
-{ printf("Recognized %s\n", "WHILE");return WHILE; }
+{ return WHILE; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
 #line 19 "src/scanner.l"
-{ printf("Recognized %s\n", "DO");return DO; }
+{ return DO; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
 #line 20 "src/scanner.l"
-{ printf("Recognized %s\n", "VAR");return VAR; }
+{ return VAR; }
 	YY_BREAK
 case 13:
 /* rule 13 can match eol */
 YY_RULE_SETUP
 #line 22 "src/scanner.l"
-{ printf("Recognized %s\n", "Comment"); }
+{ }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
 #line 24 "src/scanner.l"
-{ printf("Recognized %s\n", "slash t"); }
+{ }
 	YY_BREAK
 case 15:
 /* rule 15 can match eol */
 YY_RULE_SETUP
 #line 25 "src/scanner.l"
-{ printf("Recognized %s\n", "newline"); }
+{ }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
 #line 26 "src/scanner.l"
-{ printf("Recognized %s\n", "slash r"); }
+{ }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
 #line 27 "src/scanner.l"
-{ printf("Recognized %s\n", "slash v"); }
+{ }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
 #line 28 "src/scanner.l"
-{ printf("Recognized %s\n", "space"); }
+{ }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
 #line 30 "src/scanner.l"
-{ printf("Recognized %s\n", "STRING"); return STRING;}
+{ return STRING;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
 #line 31 "src/scanner.l"
-{ printf("Recognized %s\n", "NUMBER"); return NUMBER;}
+{ return NUMBER;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
 #line 32 "src/scanner.l"
-{ printf("Recognized %s\n", "IDENTIFIER"); return IDENTIFIER; }
+{ return IDENTIFIER; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
 #line 34 "src/scanner.l"
-{ printf("Recognized %s\n", "+ and such");return yytext[0]; }
+{ return yytext[0]; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
