@@ -24,8 +24,7 @@ node_t* cNode( node_index_t type, void *data, uint64_t n_children, ... ){
 %token VAR NUMBER IDENTIFIER STRING
 
 %%
-program 				: global_list 																{ 	$$ = cNode( PROGRAM, NULL, 1, $1 );
-																										printf("Success\n");
+program 				: global_list 																{ 	root = cNode( PROGRAM, NULL, 1, $1 );
 																									}
 ;
 
@@ -56,8 +55,8 @@ argument_list			: expression_list 															{ 	$$ = cNode( ARGUMENT_LIST, N
 parameter_list			: variable_list 															{ 	$$ = cNode( PARAMETER_LIST, NULL, 1, $1 ); }
 						| /*EMPTY*/ 																{ 	$$ = cNode( PARAMETER_LIST, NULL, 0 ); }
 ;
-declaration_list 		: declaration 																{ 	$$ = cNode( DECLARATION, NULL, 1, $1 ); }
-				 		| declaration_list declaration 												{ 	$$ = cNode( DECLARATION, NULL, 1, $2 ); }
+declaration_list 		: declaration 																{ 	$$ = cNode( DECLARATION_LIST, NULL, 1, $1 ); }
+				 		| declaration_list declaration 												{ 	$$ = cNode( DECLARATION_LIST, NULL, 1, $2 ); }
 ;
 
 function 				: FUNC identifier '(' parameter_list ')' statement 							{ 	$$ = cNode( FUNCTION, NULL, 3, $2, $4, $6 ); }
@@ -90,19 +89,19 @@ while_statement 		: WHILE relation DO statement 												{ 	$$ = cNode( WHILE
 ;
 
 
-relation				: expression '=' expression 												{ 	$$ = cNode( RELATION, '=', 2, $1, $3 ); }
-						| expression '<' expression 												{ 	$$ = cNode( RELATION, '<', 2, $1, $3 ); }
-						| expression '>' expression 												{ 	$$ = cNode( RELATION, '>', 2, $1, $3 ); }
-;
 expression				: number 																	{ 	$$ = cNode( EXPRESSION, NULL, 1, $1 ); }
 						| identifier 																{ 	$$ = cNode( EXPRESSION, NULL, 1, $1 ); }
 						| identifier '(' argument_list ')' 											{ 	$$ = cNode( EXPRESSION, NULL, 2, $1, $3 ); }
-						| expression '+' expression 												{ 	$$ = cNode( EXPRESSION, '+', 2, $1, $3 ); }
-						| expression '-' expression 												{ 	$$ = cNode( EXPRESSION, '-', 2, $1, $3 ); }
-						| expression '*' expression 												{ 	$$ = cNode( EXPRESSION, '*', 2, $1, $3 ); }
-						| expression '/' expression 												{ 	$$ = cNode( EXPRESSION, '/', 2, $1, $3 ); }
+						| expression '+' expression 												{ 	$$ = cNode( EXPRESSION, 'add', 2, $1, $3 ); }
+						| expression '-' expression 												{ 	$$ = cNode( EXPRESSION, 'sub', 2, $1, $3 ); }
+						| expression '*' expression 												{ 	$$ = cNode( EXPRESSION, 'mul', 2, $1, $3 ); }
+						| expression '/' expression 												{ 	$$ = cNode( EXPRESSION, 'div', 2, $1, $3 ); }
 						| '-' expression     														{ 	$$ = cNode( EXPRESSION, NULL, 1, $2 ); }
 						| '(' expression ')' 														{ 	$$ = cNode( EXPRESSION, NULL, 1, $2 ); }
+;
+relation				: expression '=' expression 												{ 	$$ = cNode( RELATION, '=', 2, $1, $3 ); }
+						| expression '<' expression 												{ 	$$ = cNode( RELATION, '<', 2, $1, $3 ); }
+						| expression '>' expression 												{ 	$$ = cNode( RELATION, '>', 2, $1, $3 ); }
 ;
 
 declaration 			: VAR variable_list 														{ 	$$ = cNode( DECLARATION, NULL, 1, $2 ); }
@@ -111,11 +110,12 @@ print_item				: expression 																{ 	$$ = cNode( PRINT_ITEM, NULL, 1, $
 						| string 																	{ 	$$ = cNode( PRINT_ITEM, NULL, 1, $1 ); }
 ;
 
-identifier 				: IDENTIFIER 																{ 	$$ = cNode( IDENTIFIER, strdup (yytext), 0 ); }
+identifier 				: IDENTIFIER 																{ 	$$ = cNode( IDENTIFIER_DATA, strdup (yytext), 0 ); }
 ;
-number 					: NUMBER 																	{ 	$$ = cNode( NUMBER, strtol ( yytext, NULL, 10 ), 0 ) }
+number 					: NUMBER 																	{ 	$$ = cNode( NUMBER_DATA, strtol ( yytext, NULL, 10 ), 0 ); 
+																									}
 ;
-string 					: STRING 																	{ 	$$ = cNode( STRING, strdup (yytext), 0 ); }
+string 					: STRING 																	{ 	$$ = cNode( STRING_DATA, strdup (yytext), 0 ); }
 ;
 
 %%

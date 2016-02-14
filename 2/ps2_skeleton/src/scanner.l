@@ -29,7 +29,7 @@ VAR 			                   	{ return VAR; }
 
 \".*\" 								{ return STRING;}
 [0-9]+ 								{ return NUMBER;}
-[a-z|A-Z][a-z|A-Z|0-9|_]* 			{ return IDENTIFIER; }
+[a-z|A-Z|_][a-z|A-Z|0-9|_]* 			{ return IDENTIFIER; }
 
 .                       			{ return yytext[0]; }
 

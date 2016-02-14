@@ -3,7 +3,7 @@
 
 void
 node_print ( node_t *root, int nesting )
-{
+{   
     if ( root != NULL )
     {
         /* Print the type of node indented by the nesting level */
@@ -21,8 +21,10 @@ node_print ( node_t *root, int nesting )
 
         /* Make a new line, and traverse the node's children in the same manner */
         putchar ( '\n' );
-        for ( int64_t i=0; i<root->n_children; i++ )
+        for ( int64_t i=0; i < root->n_children; i++ ){
+            printf( "%d\n", root->type );
             node_print ( root->children[i], nesting+1 );
+        }
     }
     else
         printf ( "%*c%p\n", nesting, ' ', root );
@@ -37,15 +39,14 @@ node_init (node_t *nd, node_index_t type, void *data, uint64_t n_children, ...)
     nd->data = data;
     nd->n_children = n_children;
 
-
     va_list valist;
 
     va_start(valist, n_children);
 
-    nd->children = (node_t**) malloc( n_children * sizeof(node_t*) );
+    nd->children = (node_t **) malloc( n_children * sizeof(node_t*) );
 
-    for( int i = 0; i < n_children; i++ ){
-        nd->children[i] = va_arg(valist, node_t*);
+    for( int64_t i = 0; i < n_children; i++ ){
+        nd->children[i] = va_arg(valist, node_t *);
     }
     va_end(valist);
 }
@@ -68,7 +69,6 @@ destroy_subtree ( node_t *discard )
 {
     if( discard == NULL )
         return;
-    printf( "Jeg har en fisk" );
     node_finalize( discard );
     free ( discard );
 }
