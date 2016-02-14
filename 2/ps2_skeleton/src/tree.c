@@ -6,6 +6,12 @@ node_print ( node_t *root, int nesting )
 {   
     if ( root != NULL )
     {
+        printf( "Hello\n" );
+        printf( "Hello\n" );
+        printf( "Hello\n" );
+        printf( "Hello\n" );
+        printf( "Hello\n" );
+        printf( "Hello\n" );
         /* Print the type of node indented by the nesting level */
         printf ( "%*c%s", nesting, ' ', node_string[root->type] );
 
@@ -21,7 +27,7 @@ node_print ( node_t *root, int nesting )
 
         /* Make a new line, and traverse the node's children in the same manner */
         putchar ( '\n' );
-        for ( int64_t i=0; i < root->n_children; i++ ){
+        for ( int64_t i=0; i < 0; i++ ){
             printf( "%d\n", root->type );
             node_print ( root->children[i], nesting+1 );
         }
