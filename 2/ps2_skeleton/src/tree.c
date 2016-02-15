@@ -6,12 +6,6 @@ node_print ( node_t *root, int nesting )
 {   
     if ( root != NULL )
     {
-        printf( "Hello\n" );
-        printf( "Hello\n" );
-        printf( "Hello\n" );
-        printf( "Hello\n" );
-        printf( "Hello\n" );
-        printf( "Hello\n" );
         /* Print the type of node indented by the nesting level */
         printf ( "%*c%s", nesting, ' ', node_string[root->type] );
 
@@ -22,13 +16,13 @@ node_print ( node_t *root, int nesting )
              root->type == STRING_DATA ||
              root->type == EXPRESSION ) 
             printf ( "(%s)", (char *) root->data );
-        else if ( root->type == NUMBER_DATA )
+        else if ( root->type == NUMBER_DATA ){
             printf ( "(%ld)", *((int64_t *)root->data) );
+        }
 
         /* Make a new line, and traverse the node's children in the same manner */
         putchar ( '\n' );
-        for ( int64_t i=0; i < 0; i++ ){
-            printf( "%d\n", root->type );
+        for ( int64_t i=0; i < root->n_children; i++ ){
             node_print ( root->children[i], nesting+1 );
         }
     }
@@ -38,23 +32,27 @@ node_print ( node_t *root, int nesting )
 
 
 /* Take the memory allocated to a node and fill it in with the given elements */
-void
-node_init (node_t *nd, node_index_t type, void *data, uint64_t n_children, ...)
+node_t*
+node_init (node_index_t type, void *data, uint64_t n_children, ...)
 {
+    node_t* nd = (node_t* ) malloc (sizeof(node_t));
+
     nd->type = type;
     nd->data = data;
     nd->n_children = n_children;
 
-    va_list valist;
+    va_list children;
 
-    va_start(valist, n_children);
+    va_start(children, n_children);
 
-    nd->children = (node_t **) malloc( n_children * sizeof(node_t*) );
+    nd->children = malloc( n_children * sizeof(node_t*) );
 
     for( int64_t i = 0; i < n_children; i++ ){
-        nd->children[i] = va_arg(valist, node_t *);
+        nd->children[i] = (node_t**)va_arg(children, node_t*);
     }
-    va_end(valist);
+    va_end(children);
+
+    return nd;
 }
 
 

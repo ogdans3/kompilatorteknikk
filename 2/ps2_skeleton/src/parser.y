@@ -1,20 +1,6 @@
 %{
 #include <vslc.h>
 
-
-node_t* cNode( node_index_t type, void *data, uint64_t n_children, ... ){
-	node_t* pointer = (node_t *) malloc (sizeof(node_t));
-    va_list children;
-    va_start(children, n_children);
-	
-	node_init( pointer, type, data, n_children, children);
-
-    va_end(children);
-
-    return pointer;
-};
-
-
 %}
 %left '+' '-'
 %left '*' '/'
@@ -24,98 +10,115 @@ node_t* cNode( node_index_t type, void *data, uint64_t n_children, ... ){
 %token VAR NUMBER IDENTIFIER STRING
 
 %%
-program 				: global_list 																{ 	root = cNode( PROGRAM, NULL, 1, $1 );
+program 				: global_list 																{ 	root = node_init( PROGRAM, NULL, 1, $1 );
 																									}
 ;
 
-global_list 			: global 																	{ 	$$ = cNode( GLOBAL_LIST, NULL, 1, $1 ); } 
-						| global_list global 														{ 	$$ = cNode( GLOBAL_LIST, NULL, 1, $1 ); } 
-						| expression
+global_list 			: global 																	{ 	$$ = node_init( GLOBAL_LIST, NULL, 1, $1 ); } 
+						| global_list global 														{ 	$$ = node_init( GLOBAL_LIST, NULL, 1, $1 ); } 
 ;
 
-global 					: function  																{ 	$$ = cNode( GLOBAL, NULL, 1, $1 ); } 
-						| declaration  																{ 	$$ = cNode( GLOBAL, NULL, 1, $1 ); }
+global 					: function  																{ 	$$ = node_init( GLOBAL, NULL, 1, $1 ); } 
+						| declaration  																{ 	$$ = node_init( GLOBAL, NULL, 1, $1 ); }
 ;
 
-statement_list			: statement 																{ 	$$ = cNode( STATEMENT_LIST, NULL, 1, $1 ); }
-						| statement_list statement 													{ 	$$ = cNode( STATEMENT_LIST, NULL, 1, $2 ); }
+statement_list			: statement 																{ 	$$ = node_init( STATEMENT_LIST, NULL, 1, $1 ); }
+						| statement_list statement 													{ 	$$ = node_init( STATEMENT_LIST, NULL, 1, $2 ); }
 ;
-print_list 				: print_item 																{ 	$$ = cNode( PRINT_LIST, NULL, 1, $1 ); }
-						| print_list ',' print_item 												{ 	$$ = cNode( PRINT_LIST, NULL, 1, $3 ); }
+print_list 				: print_item 																{ 	$$ = node_init( PRINT_LIST, NULL, 1, $1 ); }
+						| print_list ',' print_item 												{ 	$$ = node_init( PRINT_LIST, NULL, 1, $3 ); }
 ;
-expression_list			: expression 																{ 	$$ = cNode( EXPRESSION_LIST, NULL, 1, $1 ); }
-						| expression_list ',' expression 											{ 	$$ = cNode( EXPRESSION_LIST, NULL, 1, $3); }
+expression_list			: expression 																{ 	$$ = node_init( EXPRESSION_LIST, NULL, 1, $1 ); }
+						| expression_list ',' expression 											{ 	$$ = node_init( EXPRESSION_LIST, NULL, 1, $3); }
 ;
-variable_list			: identifier 																{ 	$$ = cNode( VARIABLE_LIST, NULL, 1, $1 ); }
-						| variable_list ',' identifier 												{ 	$$ = cNode( VARIABLE_LIST, NULL, 1, $3 ); }
+variable_list			: identifier 																{ 	$$ = node_init( VARIABLE_LIST, NULL, 1, $1 ); }
+						| variable_list ',' identifier 												{ 	$$ = node_init( VARIABLE_LIST, NULL, 1, $3 ); }
 ;
-argument_list			: expression_list 															{ 	$$ = cNode( ARGUMENT_LIST, NULL, 1, $1 ); }
-						| /*EMPTY*/ 																{ 	$$ = cNode( ARGUMENT_LIST, NULL, 0 ); }
+argument_list			: expression_list 															{ 	$$ = node_init( ARGUMENT_LIST, NULL, 1, $1 ); }
+						| /*EMPTY*/ 																{ 	$$ = node_init( ARGUMENT_LIST, NULL, 0 ); }
 ;
-parameter_list			: variable_list 															{ 	$$ = cNode( PARAMETER_LIST, NULL, 1, $1 ); }
-						| /*EMPTY*/ 																{ 	$$ = cNode( PARAMETER_LIST, NULL, 0 ); }
+parameter_list			: variable_list 															{ 	$$ = node_init( PARAMETER_LIST, NULL, 1, $1 ); }
+						| /*EMPTY*/ 																{ 	$$ = node_init( PARAMETER_LIST, NULL, 0 ); }
 ;
-declaration_list 		: declaration 																{ 	$$ = cNode( DECLARATION_LIST, NULL, 1, $1 ); }
-				 		| declaration_list declaration 												{ 	$$ = cNode( DECLARATION_LIST, NULL, 1, $2 ); }
-;
-
-function 				: FUNC identifier '(' parameter_list ')' statement 							{ 	$$ = cNode( FUNCTION, NULL, 3, $2, $4, $6 ); }
-;
-statement 				: if_statement 																{ 	$$ = cNode( STATEMENT, NULL, 1, $1 ); }
-						| assignment_statement 														{ 	$$ = cNode( STATEMENT, NULL, 1, $1 ); }
-						| return_statement 															{ 	$$ = cNode( STATEMENT, NULL, 1, $1 ); }
-						| while_statement 															{ 	$$ = cNode( STATEMENT, NULL, 1, $1 ); }
-						| print_statement 															{ 	$$ = cNode( STATEMENT, NULL, 1, $1 ); }	
-						| null_statement 															{ 	$$ = cNode( STATEMENT, NULL, 1, $1 ); }
-						| block 																	{ 	$$ = cNode( STATEMENT, NULL, 1, $1 ); }
+declaration_list 		: declaration 																{ 	$$ = node_init( DECLARATION_LIST, NULL, 1, $1 ); }
+				 		| declaration_list declaration 												{ 	$$ = node_init( DECLARATION_LIST, NULL, 1, $2 ); }
 ;
 
-
-block 					: OPENBLOCK declaration_list statement_list CLOSEBLOCK 						{ 	$$ = cNode( BLOCK, NULL, 2, $2, $3 ); }
-						| OPENBLOCK statement_list CLOSEBLOCK 										{ 	$$ = cNode( BLOCK, NULL, 1, $2 ); }
+function 				: FUNC identifier '(' parameter_list ')' statement 							{ 	$$ = node_init( FUNCTION, NULL, 3, $2, $4, $6 ); }
 ;
-assignment_statement 	: identifier ':' '=' expression 											{ 	$$ = cNode( ASSIGNMENT_STATEMENT, NULL, 2, $1, $4 ); }
+statement 				:assignment_statement 														{ 	$$ = node_init( STATEMENT, NULL, 1, $1 ); }
+						| return_statement 															{ 	$$ = node_init( STATEMENT, NULL, 1, $1 ); }
 ;
-return_statement 		: RETURN expression 														{ 	$$ = cNode( RETURN_STATEMENT, NULL, 1, $2); }
+statement 				: print_statement 															{ 	$$ = node_init( STATEMENT, NULL, 1, $1 ); }	
+						| if_statement 																{ 	$$ = node_init( STATEMENT, NULL, 1, $1 ); }
 ;
-print_statement			: PRINT print_list 															{ 	$$ = cNode( PRINT_STATEMENT, NULL, 1, $1 ); }
-;
-null_statement			: CONTINUE 																	{ 	$$ = cNode( NULL_STATEMENT, NULL, 1, $1 ); }
-;
-if_statement			: IF relation THEN statement 												{ 	$$ = cNode( IF_STATEMENT, NULL, 2, $2, $4 ); }
-						| IF relation THEN statement ELSE statement 								{ 	$$ = cNode( IF_STATEMENT, NULL, 3, $2, $4, $6 ); }
-;
-while_statement 		: WHILE relation DO statement 												{ 	$$ = cNode( WHILE_STATEMENT, NULL, 2, $2, $4 ); }
+statement 				: while_statement 															{ 	$$ = node_init( STATEMENT, NULL, 1, $1 ); }
+						| null_statement 															{ 	$$ = node_init( STATEMENT, NULL, 1, $1 ); }
+						| block 																	{ 	$$ = node_init( STATEMENT, NULL, 1, $1 ); }
 ;
 
-
-expression				: number 																	{ 	$$ = cNode( EXPRESSION, NULL, 1, $1 ); }
-						| identifier 																{ 	$$ = cNode( EXPRESSION, NULL, 1, $1 ); }
-						| identifier '(' argument_list ')' 											{ 	$$ = cNode( EXPRESSION, NULL, 2, $1, $3 ); }
-						| expression '+' expression 												{ 	$$ = cNode( EXPRESSION, 'add', 2, $1, $3 ); }
-						| expression '-' expression 												{ 	$$ = cNode( EXPRESSION, 'sub', 2, $1, $3 ); }
-						| expression '*' expression 												{ 	$$ = cNode( EXPRESSION, 'mul', 2, $1, $3 ); }
-						| expression '/' expression 												{ 	$$ = cNode( EXPRESSION, 'div', 2, $1, $3 ); }
-						| '-' expression     														{ 	$$ = cNode( EXPRESSION, NULL, 1, $2 ); }
-						| '(' expression ')' 														{ 	$$ = cNode( EXPRESSION, NULL, 1, $2 ); }
+block 					: OPENBLOCK declaration_list statement_list CLOSEBLOCK 						{ 	$$ = node_init( BLOCK, NULL, 2, $2, $3 ); }
 ;
-relation				: expression '=' expression 												{ 	$$ = cNode( RELATION, '=', 2, $1, $3 ); }
-						| expression '<' expression 												{ 	$$ = cNode( RELATION, '<', 2, $1, $3 ); }
-						| expression '>' expression 												{ 	$$ = cNode( RELATION, '>', 2, $1, $3 ); }
+block 					: OPENBLOCK statement_list CLOSEBLOCK 										{ 	$$ = node_init( BLOCK, NULL, 1, $2 ); }
+;
+assignment_statement 	: identifier ':' '=' expression 											{ 	$$ = node_init( ASSIGNMENT_STATEMENT, NULL, 2, $1, $4 ); }
+;
+return_statement 		: RETURN expression 														{ 	$$ = node_init( RETURN_STATEMENT, NULL, 1, $2); }
+;
+print_statement			: PRINT print_list 															{ 	$$ = node_init( PRINT_STATEMENT, NULL, 1, $1 ); }
+;
+null_statement			: CONTINUE 																	{ 	$$ = node_init( NULL_STATEMENT, NULL, 1, $1 ); }
 ;
 
-declaration 			: VAR variable_list 														{ 	$$ = cNode( DECLARATION, NULL, 1, $2 ); }
+if_statement			: IF relation THEN statement 												{ 	$$ = node_init( IF_STATEMENT, NULL, 2, $2, $4 ); }
 ;
-print_item				: expression 																{ 	$$ = cNode( PRINT_ITEM, NULL, 1, $1 ); }
-						| string 																	{ 	$$ = cNode( PRINT_ITEM, NULL, 1, $1 ); }
+if_statement 			: IF relation THEN statement ELSE statement 								{ 	$$ = node_init( IF_STATEMENT, NULL, 3, $2, $4, $6 ); }
+;
+while_statement 		: WHILE relation DO statement 												{ 	$$ = node_init( WHILE_STATEMENT, NULL, 2, $2, $4 ); }
 ;
 
-identifier 				: IDENTIFIER 																{ 	$$ = cNode( IDENTIFIER_DATA, strdup (yytext), 0 ); }
+
+relation				: expression '=' expression 												{ 	$$ = node_init( RELATION, strdup("="), 2, $1, $3 ); }
 ;
-number 					: NUMBER 																	{ 	$$ = cNode( NUMBER_DATA, strtol ( yytext, NULL, 10 ), 0 ); 
+relation 				: expression '<' expression 												{ 	$$ = node_init( RELATION, strdup("<"), 2, $1, $3 ); }
+;
+relation 				: expression '>' expression 												{ 	$$ = node_init( RELATION, strdup(">"), 2, $1, $3 ); }
+;
+expression 				: expression '+' expression 												{ 	$$ = node_init( EXPRESSION, strdup("+"), 2, $1, $3 ); }
+;
+expression 				: expression '-' expression 												{ 	$$ = node_init( EXPRESSION, strdup("-"), 2, $1, $3 ); }
+;
+expression 				: expression '*' expression 												{ 	$$ = node_init( EXPRESSION, strdup("*"), 2, $1, $3 ); }
+;
+expression 				: expression '/' expression 												{ 	$$ = node_init( EXPRESSION, strdup("/"), 2, $1, $3 ); }
+;
+
+expression 				: '-' expression     														{ 	$$ = node_init( EXPRESSION, NULL, 1, $2 ); }
+;
+expression 				: '(' expression ')' 														{ 	$$ = node_init( EXPRESSION, NULL, 1, $2 ); }
+;
+
+expression				: number 																	{ 	$$ = node_init( EXPRESSION, NULL, 1, $1 ); }
+						| identifier 																{ 	$$ = node_init( EXPRESSION, NULL, 1, $1 ); }
+						| identifier '(' argument_list ')' 											{ 	$$ = node_init( EXPRESSION, NULL, 2, $1, $3 ); }
+;
+
+declaration 			: VAR variable_list 														{ 	$$ = node_init( DECLARATION, NULL, 1, $2 ); }
+;
+print_item				: expression 																{ 	$$ = node_init( PRINT_ITEM, NULL, 1, $1 ); }
+						| string 																	{ 	$$ = node_init( PRINT_ITEM, NULL, 1, $1 ); }
+;
+
+identifier 				: IDENTIFIER 																{ 	$$ = node_init( IDENTIFIER_DATA, strdup (yytext), 0 ); }
+;
+number 					: NUMBER 																	{ 	
+																										long *i = malloc( sizeof(*i) );
+																										*i = (long) yylval;
+																										/*strtol ( yytext, NULL, 10 )*/
+																										$$ = node_init( NUMBER_DATA, i, 0 ); 
 																									}
 ;
-string 					: STRING 																	{ 	$$ = cNode( STRING_DATA, strdup (yytext), 0 ); }
+string 					: STRING 																	{ 	$$ = node_init( STRING_DATA, strdup (yytext), 0 ); }
 ;
 
 %%
