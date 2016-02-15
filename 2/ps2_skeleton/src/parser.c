@@ -82,13 +82,12 @@ node_t* cNode( node_index_t type, void *data, uint64_t n_children, ... ){
 
     va_end(children);
     return nd;
-	
 }
 
 
 
 /* Line 268 of yacc.c  */
-#line 92 "y.tab.c"
+#line 91 "y.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -148,7 +147,7 @@ typedef int YYSTYPE;
 
 
 /* Line 343 of yacc.c  */
-#line 152 "y.tab.c"
+#line 151 "y.tab.c"
 
 #ifdef short
 # undef short
@@ -456,12 +455,12 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    28,    28,    32,    33,    36,    37,    40,    41,    43,
-      44,    46,    47,    49,    50,    52,    53,    55,    56,    58,
-      59,    62,    64,    65,    67,    68,    70,    71,    72,    75,
-      77,    79,    81,    83,    85,    88,    90,    92,    96,    98,
-     100,   104,   105,   106,   108,   110,   112,   114,   116,   118,
-     121,   123,   124,   127,   129,   135
+       0,    27,    27,    31,    32,    35,    36,    39,    40,    42,
+      43,    45,    46,    48,    49,    51,    52,    54,    55,    57,
+      58,    61,    63,    64,    66,    67,    69,    70,    71,    74,
+      76,    78,    80,    82,    84,    87,    89,    91,    95,    97,
+      99,   103,   104,   105,   107,   109,   111,   113,   115,   117,
+     120,   122,   123,   126,   128,   134
 };
 #endif
 
@@ -1463,7 +1462,7 @@ yyreduce:
         case 2:
 
 /* Line 1806 of yacc.c  */
-#line 28 "src/parser.y"
+#line 27 "src/parser.y"
     { 	root = cNode( PROGRAM, NULL, 1, (yyvsp[(1) - (1)]) );
 																									}
     break;
@@ -1471,364 +1470,364 @@ yyreduce:
   case 3:
 
 /* Line 1806 of yacc.c  */
-#line 32 "src/parser.y"
+#line 31 "src/parser.y"
     { 	(yyval) = cNode( GLOBAL_LIST, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 4:
 
 /* Line 1806 of yacc.c  */
-#line 33 "src/parser.y"
+#line 32 "src/parser.y"
     { 	(yyval) = cNode( GLOBAL_LIST, NULL, 2, (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]) ); }
     break;
 
   case 5:
 
 /* Line 1806 of yacc.c  */
-#line 36 "src/parser.y"
+#line 35 "src/parser.y"
     { 	(yyval) = cNode( GLOBAL, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 6:
 
 /* Line 1806 of yacc.c  */
-#line 37 "src/parser.y"
+#line 36 "src/parser.y"
     { 	(yyval) = cNode( GLOBAL, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 7:
 
 /* Line 1806 of yacc.c  */
-#line 40 "src/parser.y"
+#line 39 "src/parser.y"
     { 	(yyval) = cNode( STATEMENT_LIST, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 8:
 
 /* Line 1806 of yacc.c  */
-#line 41 "src/parser.y"
+#line 40 "src/parser.y"
     { 	(yyval) = cNode( STATEMENT_LIST, NULL, 2, (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]) ); }
     break;
 
   case 9:
 
 /* Line 1806 of yacc.c  */
-#line 43 "src/parser.y"
+#line 42 "src/parser.y"
     { 	(yyval) = cNode( PRINT_LIST, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 10:
 
 /* Line 1806 of yacc.c  */
-#line 44 "src/parser.y"
+#line 43 "src/parser.y"
     { 	(yyval) = cNode( PRINT_LIST, NULL, 2, (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)]) ); }
     break;
 
   case 11:
 
 /* Line 1806 of yacc.c  */
-#line 46 "src/parser.y"
+#line 45 "src/parser.y"
     { 	(yyval) = cNode( EXPRESSION_LIST, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 12:
 
 /* Line 1806 of yacc.c  */
-#line 47 "src/parser.y"
+#line 46 "src/parser.y"
     { 	(yyval) = cNode( EXPRESSION_LIST, NULL, 2, (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)])); }
     break;
 
   case 13:
 
 /* Line 1806 of yacc.c  */
-#line 49 "src/parser.y"
+#line 48 "src/parser.y"
     { 	(yyval) = cNode( VARIABLE_LIST, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 14:
 
 /* Line 1806 of yacc.c  */
-#line 50 "src/parser.y"
+#line 49 "src/parser.y"
     { 	(yyval) = cNode( VARIABLE_LIST, NULL, 2, (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)]) ); }
     break;
 
   case 15:
 
 /* Line 1806 of yacc.c  */
-#line 52 "src/parser.y"
+#line 51 "src/parser.y"
     { 	(yyval) = cNode( ARGUMENT_LIST, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 16:
 
 /* Line 1806 of yacc.c  */
-#line 53 "src/parser.y"
+#line 52 "src/parser.y"
     { 	(yyval) = NULL; }
     break;
 
   case 17:
 
 /* Line 1806 of yacc.c  */
-#line 55 "src/parser.y"
+#line 54 "src/parser.y"
     { 	(yyval) = cNode( PARAMETER_LIST, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 18:
 
 /* Line 1806 of yacc.c  */
-#line 56 "src/parser.y"
+#line 55 "src/parser.y"
     { 	(yyval) = NULL; }
     break;
 
   case 19:
 
 /* Line 1806 of yacc.c  */
-#line 58 "src/parser.y"
+#line 57 "src/parser.y"
     { 	(yyval) = cNode( DECLARATION_LIST, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 20:
 
 /* Line 1806 of yacc.c  */
-#line 59 "src/parser.y"
+#line 58 "src/parser.y"
     { 	(yyval) = cNode( DECLARATION_LIST, NULL, 2, (yyvsp[(1) - (2)]), (yyvsp[(2) - (2)]) ); }
     break;
 
   case 21:
 
 /* Line 1806 of yacc.c  */
-#line 62 "src/parser.y"
+#line 61 "src/parser.y"
     { 	(yyval) = cNode( FUNCTION, NULL, 3, (yyvsp[(2) - (6)]), (yyvsp[(4) - (6)]), (yyvsp[(6) - (6)]) ); }
     break;
 
   case 22:
 
 /* Line 1806 of yacc.c  */
-#line 64 "src/parser.y"
+#line 63 "src/parser.y"
     { 	(yyval) = cNode( STATEMENT, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 23:
 
 /* Line 1806 of yacc.c  */
-#line 65 "src/parser.y"
+#line 64 "src/parser.y"
     { 	(yyval) = cNode( STATEMENT, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 24:
 
 /* Line 1806 of yacc.c  */
-#line 67 "src/parser.y"
+#line 66 "src/parser.y"
     { 	(yyval) = cNode( STATEMENT, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 25:
 
 /* Line 1806 of yacc.c  */
-#line 68 "src/parser.y"
+#line 67 "src/parser.y"
     { 	(yyval) = cNode( STATEMENT, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 26:
 
 /* Line 1806 of yacc.c  */
-#line 70 "src/parser.y"
+#line 69 "src/parser.y"
     { 	(yyval) = cNode( STATEMENT, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 27:
 
 /* Line 1806 of yacc.c  */
-#line 71 "src/parser.y"
+#line 70 "src/parser.y"
     { 	(yyval) = cNode( STATEMENT, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 28:
 
 /* Line 1806 of yacc.c  */
-#line 72 "src/parser.y"
+#line 71 "src/parser.y"
     { 	(yyval) = cNode( STATEMENT, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 29:
 
 /* Line 1806 of yacc.c  */
-#line 75 "src/parser.y"
+#line 74 "src/parser.y"
     { 	(yyval) = cNode( BLOCK, NULL, 2, (yyvsp[(2) - (4)]), (yyvsp[(3) - (4)]) ); }
     break;
 
   case 30:
 
 /* Line 1806 of yacc.c  */
-#line 77 "src/parser.y"
+#line 76 "src/parser.y"
     { 	(yyval) = cNode( BLOCK, NULL, 1, (yyvsp[(2) - (3)]) ); }
     break;
 
   case 31:
 
 /* Line 1806 of yacc.c  */
-#line 79 "src/parser.y"
+#line 78 "src/parser.y"
     { 	(yyval) = cNode( ASSIGNMENT_STATEMENT, NULL, 2, (yyvsp[(1) - (4)]), (yyvsp[(4) - (4)]) ); }
     break;
 
   case 32:
 
 /* Line 1806 of yacc.c  */
-#line 81 "src/parser.y"
+#line 80 "src/parser.y"
     { 	(yyval) = cNode( RETURN_STATEMENT, NULL, 1, (yyvsp[(2) - (2)])); }
     break;
 
   case 33:
 
 /* Line 1806 of yacc.c  */
-#line 83 "src/parser.y"
+#line 82 "src/parser.y"
     { 	(yyval) = cNode( PRINT_STATEMENT, NULL, 1, (yyvsp[(2) - (2)]) ); }
     break;
 
   case 34:
 
 /* Line 1806 of yacc.c  */
-#line 85 "src/parser.y"
+#line 84 "src/parser.y"
     { 	(yyval) = cNode( NULL_STATEMENT, NULL, 0 ); }
     break;
 
   case 35:
 
 /* Line 1806 of yacc.c  */
-#line 88 "src/parser.y"
+#line 87 "src/parser.y"
     { 	(yyval) = cNode( IF_STATEMENT, NULL, 2, (yyvsp[(2) - (4)]), (yyvsp[(4) - (4)]) ); }
     break;
 
   case 36:
 
 /* Line 1806 of yacc.c  */
-#line 90 "src/parser.y"
+#line 89 "src/parser.y"
     { 	(yyval) = cNode( IF_STATEMENT, NULL, 3, (yyvsp[(2) - (6)]), (yyvsp[(4) - (6)]), (yyvsp[(6) - (6)]) ); }
     break;
 
   case 37:
 
 /* Line 1806 of yacc.c  */
-#line 92 "src/parser.y"
+#line 91 "src/parser.y"
     { 	(yyval) = cNode( WHILE_STATEMENT, NULL, 2, (yyvsp[(2) - (4)]), (yyvsp[(4) - (4)]) ); }
     break;
 
   case 38:
 
 /* Line 1806 of yacc.c  */
-#line 96 "src/parser.y"
+#line 95 "src/parser.y"
     { 	(yyval) = cNode( RELATION, strdup("="), 2, (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)]) ); }
     break;
 
   case 39:
 
 /* Line 1806 of yacc.c  */
-#line 98 "src/parser.y"
+#line 97 "src/parser.y"
     { 	(yyval) = cNode( RELATION, strdup("<"), 2, (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)]) ); }
     break;
 
   case 40:
 
 /* Line 1806 of yacc.c  */
-#line 100 "src/parser.y"
+#line 99 "src/parser.y"
     { 	(yyval) = cNode( RELATION, strdup(">"), 2, (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)]) ); }
     break;
 
   case 41:
 
 /* Line 1806 of yacc.c  */
-#line 104 "src/parser.y"
+#line 103 "src/parser.y"
     { 	(yyval) = cNode( EXPRESSION, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 42:
 
 /* Line 1806 of yacc.c  */
-#line 105 "src/parser.y"
+#line 104 "src/parser.y"
     { 	(yyval) = cNode( EXPRESSION, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 43:
 
 /* Line 1806 of yacc.c  */
-#line 106 "src/parser.y"
+#line 105 "src/parser.y"
     { 	(yyval) = cNode( EXPRESSION, NULL, 2, (yyvsp[(1) - (4)]), (yyvsp[(3) - (4)]) ); }
     break;
 
   case 44:
 
 /* Line 1806 of yacc.c  */
-#line 108 "src/parser.y"
+#line 107 "src/parser.y"
     { 	(yyval) = cNode( EXPRESSION, strdup("+"), 2, (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)]) ); }
     break;
 
   case 45:
 
 /* Line 1806 of yacc.c  */
-#line 110 "src/parser.y"
+#line 109 "src/parser.y"
     { 	(yyval) = cNode( EXPRESSION, strdup("-"), 2, (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)]) ); }
     break;
 
   case 46:
 
 /* Line 1806 of yacc.c  */
-#line 112 "src/parser.y"
+#line 111 "src/parser.y"
     { 	(yyval) = cNode( EXPRESSION, strdup("*"), 2, (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)]) ); }
     break;
 
   case 47:
 
 /* Line 1806 of yacc.c  */
-#line 114 "src/parser.y"
+#line 113 "src/parser.y"
     { 	(yyval) = cNode( EXPRESSION, strdup("/"), 2, (yyvsp[(1) - (3)]), (yyvsp[(3) - (3)]) ); }
     break;
 
   case 48:
 
 /* Line 1806 of yacc.c  */
-#line 116 "src/parser.y"
+#line 115 "src/parser.y"
     { 	(yyval) = cNode( EXPRESSION, strdup("-"), 1, (yyvsp[(2) - (2)]) ); }
     break;
 
   case 49:
 
 /* Line 1806 of yacc.c  */
-#line 118 "src/parser.y"
+#line 117 "src/parser.y"
     { 	(yyval) = (yyvsp[(2) - (3)]); }
     break;
 
   case 50:
 
 /* Line 1806 of yacc.c  */
-#line 121 "src/parser.y"
+#line 120 "src/parser.y"
     { 	(yyval) = cNode( DECLARATION, NULL, 1, (yyvsp[(2) - (2)]) ); }
     break;
 
   case 51:
 
 /* Line 1806 of yacc.c  */
-#line 123 "src/parser.y"
+#line 122 "src/parser.y"
     { 	(yyval) = cNode( PRINT_ITEM, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 52:
 
 /* Line 1806 of yacc.c  */
-#line 124 "src/parser.y"
+#line 123 "src/parser.y"
     { 	(yyval) = cNode( PRINT_ITEM, NULL, 1, (yyvsp[(1) - (1)]) ); }
     break;
 
   case 53:
 
 /* Line 1806 of yacc.c  */
-#line 127 "src/parser.y"
+#line 126 "src/parser.y"
     { 	(yyval) = cNode( IDENTIFIER_DATA, strdup(yytext), 0 ); }
     break;
 
   case 54:
 
 /* Line 1806 of yacc.c  */
-#line 129 "src/parser.y"
+#line 128 "src/parser.y"
     { 	
 																										int64_t *i = malloc( sizeof(*i) );
 																										*i = (int64_t) strtol( yytext, NULL, 10 );
@@ -1839,14 +1838,14 @@ yyreduce:
   case 55:
 
 /* Line 1806 of yacc.c  */
-#line 135 "src/parser.y"
+#line 134 "src/parser.y"
     { 	(yyval) = cNode( STRING_DATA, strdup(yytext), 0 ); }
     break;
 
 
 
 /* Line 1806 of yacc.c  */
-#line 1850 "y.tab.c"
+#line 1849 "y.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -2077,7 +2076,7 @@ yyreturn:
 
 
 /* Line 2067 of yacc.c  */
-#line 138 "src/parser.y"
+#line 137 "src/parser.y"
 
 
 int
