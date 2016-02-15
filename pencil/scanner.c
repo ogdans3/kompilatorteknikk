@@ -6,7 +6,7 @@
 #include "pencil.h"
 
 
-int transitionTable [4][360];
+int transitionTable [9][360];
 char token[4];
 int __index = 0;
 
@@ -23,20 +23,20 @@ int __index = 0;
 void
 init_transtab ( void ){
 	transitionTable[0][(int)'m'] = 1;
-	transitionTable[0][(int)'t'] = 1;
-	transitionTable[0][(int)'d'] = 1;
+	transitionTable[0][(int)'t'] = 2;
+	transitionTable[0][(int)'d'] = 3;
 
-	transitionTable[1][(int)'o'] = 2;
-	transitionTable[1][(int)'u'] = 2;
-	transitionTable[1][(int)'r'] = 2;
+	transitionTable[1][(int)'o'] = 4;
+	transitionTable[2][(int)'u'] = 5;
+	transitionTable[3][(int)'r'] = 6;
 
-	transitionTable[2][(int)'v'] = 3;
-	transitionTable[2][(int)'r'] = 3;
-	transitionTable[2][(int)'a'] = 3;
+	transitionTable[4][(int)'v'] = 7;
+	transitionTable[5][(int)'r'] = 8;
+	transitionTable[6][(int)'a'] = 9;
 
-	transitionTable[3][(int)'e'] = -1;
-        transitionTable[3][(int)'n'] = -1;
-        transitionTable[3][(int)'w'] = -1;
+	transitionTable[7][(int)'e'] = -1;
+    transitionTable[8][(int)'n'] = -1;
+    transitionTable[9][(int)'w'] = -1;
 
 }
 
@@ -70,26 +70,27 @@ next ( FILE *input )
 		//Since all the tokens are of the same length, we do not actually have to clean the token array
 		//when a word fails, since it will automatically rewrite the values correctly.
 		token[__index] = c;
-		__index = newState;
 
 		/*
 		printf( "%s\n", token );
 		printf( "%d\n", __index );
 		printf( "%d\n", newState );
 		*/	
-		if( __index == -1 ){
-	        	if( token[0] == 'm' ){
+		if( newState == -1 ){
+	        	if( __index == 7 ){
                 		return MOVE;
        			}
-        		else if( token[0] == 'd' ){
-                		return DRAW;
-        		} 
-        		else if( token[0] == 't' ){
+        		else if( __index == 8 ){
                 		return TURN;
+        		} 
+        		else if( __index == 9 ){
+                		return DRAW;
         		}else{
 				return END;
 			}
 		}
+		__index = newState;
+
 	}while( c != EOF );
    	return END;
 }

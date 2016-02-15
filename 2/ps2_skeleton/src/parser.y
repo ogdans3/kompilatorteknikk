@@ -13,7 +13,6 @@ node_t* cNode( node_index_t type, void *data, uint64_t n_children, ... ){
 
     va_end(children);
     return nd;
-	
 }
 
 %}
