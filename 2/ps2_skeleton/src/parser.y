@@ -98,7 +98,7 @@ expression 				: expression '*' expression 												{ 	$$ = node_init( EXPRES
 ;
 expression 				: expression '/' expression 												{ 	$$ = node_init( EXPRESSION, strdup("/"), 2, $1, $3 ); }
 ;
-expression 				: '-' expression %prec UMINUS   															{ 	$$ = node_init( EXPRESSION, strdup("-"), 1, $2 ); }
+expression 				: '-' expression %prec UMINUS   											{ 	$$ = node_init( EXPRESSION, strdup("-"), 1, $2 ); }
 ;
 expression 				: '(' expression ')' 														{ 	$$ = $2; }
 ;
