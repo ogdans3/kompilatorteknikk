@@ -27,7 +27,7 @@ VAR 			                   	{ return VAR; }
 \v									{ }
 "\ "		 						{ }
 
-\".*\" 								{ return STRING;}
+\"([^"]|(\\\"))*\" 								{ return STRING;}
 [0-9]+ 								{ return NUMBER;}
 [a-z|A-Z|_][a-z|A-Z|0-9|_]* 			{ return IDENTIFIER; }
 
